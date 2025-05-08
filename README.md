@@ -1,4 +1,4 @@
-# C4P Diagnostics Toolkit
+# 💻 C4P Diagnostics Toolkit
 
 The **C4P Diagnostics Toolkit** is a standalone executable designed to assist in the refurbishment and quality assurance of laptops. It provides a user-friendly interface for performing various diagnostic tests, generating reports, and ensuring that laptops meet the required standards for donation or reuse.
 
