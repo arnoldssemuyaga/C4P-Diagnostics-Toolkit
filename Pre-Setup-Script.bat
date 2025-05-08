@@ -1,52 +1,20 @@
-::[Bat To Exe Converter]
-::
-::YAwzoRdxOk+EWAjk
-::fBw5plQjdCyDJG6N+kY/PwhofwGWKXuGJeEspuH44Io=
-::YAwzuBVtJxjWCl3EqQJgSA==
-::ZR4luwNxJguZRRnk
-::Yhs/ulQjdF+5
-::cxAkpRVqdFKZSjk=
-::cBs/ulQjdF+5
-::ZR41oxFsdFKZSDk=
-::eBoioBt6dFKZSDk=
-::cRo6pxp7LAbNWATEpCI=
-::egkzugNsPRvcWATEpCI=
-::dAsiuh18IRvcCxnZtBJQ
-::cRYluBh/LU+EWAnk
-::YxY4rhs+aU+JeA==
-::cxY6rQJ7JhzQF1fEqQJQ
-::ZQ05rAF9IBncCkqN+0xwdVs0
-::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
-::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQJQ
-::dhA7uBVwLU+EWDk=
-::YQ03rBFzNR3SWATElA==
-::dhAmsQZ3MwfNWATElA==
-::ZQ0/vhVqMQ3MEVWAtB9wSA==
-::Zg8zqx1/OA3MEVWAtB9wSA==
-::dhA7pRFwIByZRRnk
-::Zh4grVQjdCyDJGyX8VAjFDpQQQ2MNXiuFLQI5/rHy++UqVkSRN4IcYHf1aOdYMkgxQXCfJooxUZql9gYQShdage7UixgmSNypGHIBMKIph+sbkGI4QU1A2AU
-::YB416Ek+ZG8=
-::
-::
-::978f952a14a936cc963da21a135fa983
 @echo off
 ::BatchHasAdmin
-:-------------------------------------
-REM --> Check if this file has administrator rights.
+:...........................................................
+REM Check for administrative privileges
     IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
 >nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
 ) ELSE (
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 )
 
-REM --> If no rights, we don't have setted the flag for it.
+REM If errorlevel 1, we do not have admin rights
 if '%errorlevel%' NEQ '0' (
     echo Requesting administrative privileges...
     goto UACPrompt
 ) else ( goto gotAdmin )
 
+REM If we have admin rights, continue with the script
 :UACPrompt
     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
     set params= %*
@@ -55,14 +23,50 @@ if '%errorlevel%' NEQ '0' (
     "%temp%\getadmin.vbs"
     del "%temp%\getadmin.vbs"
     exit /B
-
+    
+REM If we get here, we have admin rights
 :gotAdmin
     pushd "%CD%"
     CD /D "%~dp0"
-:--------------------------------------    
-:: MainCode
+:...........................................................   
+REM formattedTime function (for showing the current time in 12-hour format and AM/PM)
+setlocal enabledelayedexpansion
+
+REM Get current time components (and strip leading space if any)
+set "rawHour=%TIME:~0,2%"
+set "minute=%TIME:~3,2%"
+set "second=%TIME:~6,2%"
+
+REM Trim leading space in hour if it exists
+if "!rawHour:~0,1!"==" " (
+    set "rawHour=0!rawHour:~1,1!"
+)
+
+REM Force numeric interpretation of hour
+set /a hour=1%rawHour% - 100
+
+REM Convert to 12-hour format
+set "ampm=AM"
+if !hour! GEQ 12 (
+    set "ampm=PM"
+)
+if !hour! GTR 12 (
+    set /a hour=hour - 12
+)
+if !hour! EQU 0 (
+    set "hour=12"
+    set "ampm=AM"
+)
+
+REM Pad hour with leading 0 if < 10
+if !hour! LSS 10 set "hour=0!hour!"
+
+REM Final formatted time variable
+set "formattedTime=!hour!:!minute!:!second! !ampm!"
+   
+REM Main Menu 
 @echo off
-title C4P Pre-Setup Diagnostic Tool 
+title C4P Pre-Setup Diagnostics Toolkit
 =======
 color F
 cls
@@ -71,126 +75,241 @@ cls
 cls
 color 0a
 =======
+echo ======================================================================================================================
+echo                                     Hello. Welcome to the C4P Diagnostics Tool.
+echo                                                  PRE-SETUP V1.3
+echo                                The date is %DATE%, and the time is %formattedTime%.
+echo ======================================================================================================================
 echo.
-echo Welcome to the C4P Pre-Setup Diagnostic Tool. This tool will help assess laptop specifications and
-echo run diagnostics tests before logon.
+echo ======================================================================================================================
+echo                                      #1 - Check Battery Health w/ BatteryInfoView
+echo ======================================================================================================================
+echo                                                 #2 - Test Keyboard
+echo ======================================================================================================================
+echo                                             #3 - Test WiFi and Bluetooth
+echo ======================================================================================================================
+echo                                            #4 - Verify Windows Activation
+echo ======================================================================================================================
+echo                                               #5 - System Information
+echo ======================================================================================================================
+echo                                           Enter r to Restart or s to Shutdown
+echo ======================================================================================================================
+echo                                               Enter c to Close the Tool
+echo ======================================================================================================================
 echo.
-echo The date is %DATE% and the time is %TIME%.
-echo.
-echo ...........................................................
-echo #1 - Test Battery Health w/ BatteryInfoView
-echo ...........................................................
-echo #2 - Test Keyboard
-echo ...........................................................
-echo #3 - Test WiFi Connection
-echo ...........................................................
-echo #4 - Verify Windows Activation
-echo ...........................................................
-echo #5 - System Information
-echo ...........................................................
-echo #6 - Basic System Information (CPU, GPU, RAM)
-echo ...........................................................
-echo Enter r to Restart or s to Shutdown
-echo ...........................................................
-echo Enter c to Close the Tool
-echo ...........................................................
-echo.
+:...........................................................
 
+REM Prompting the user for input
+:MainMenuInput
 SET /P A=Enter: 
-
+IF "%A%"=="" (
+    echo  Invalid option, please try again.
+    echo.
+    GOTO MainMenuInput
+)
 IF %A%==1 GOTO bHealth
 IF %A%==2 GOTO tKeyboard
-IF %A%==3 GOTO tWiFi
+IF %A%==3 GOTO tWiFiBTMenu
 IF %A%==4 GOTO tWinAct
-IF %A%==5 GOTO SYSINFO
-IF %A%==6 GOTO GENSYSINFO
-IF %A%==R GOTO RESTART
-IF %A%==S GOTO SHUTDOWN
-IF %A%==C GOTO CLOSE
-IF %A%==r GOTO RESTART
-IF %A%==s GOTO SHUTDOWN
-IF %A%==c GOTO CLOSE
+IF %A%==5 GOTO GenSysInfo
+IF /I "%A%"=="R" GOTO RESTART
+IF /I "%A%"=="S" GOTO SHUTDOWN
+IF /I "%A%"=="C" GOTO CLOSE
 
+echo  Invalid option, please try again.
+echo.
+GOTO MainMenuInput
+
+REM Redirecting to the Battery Health Report Menu
 :bHealth
 cls
 color 0A
-echo Generating Battery Report w/ BatteryInfoView...
+echo  Launching BatteryInfoView...
 echo.
-%HOMEDRIVE%\Diagnostics\BatteryInfoView\BatteryInfoView.exe /stext %HOMEDRIVE%\Diagnostics\BatteryInfoView\batteryhealth.txt
-echo   Options:
-echo   1. Display Battery Health
-echo   2. Display Generated Report
-echo   3. Main Menu
-echo.
-set /p B=Select an Option ( 1 / 2 / 3 ): 
-if "%B%"=="1" goto dbHealth
-if "%B%"=="2" goto obReport2
-if "%B%"=="3" goto MENU
-
-:bHealth2
+%HOMEDRIVE%\Diagnostics\BatteryInfoView\BatteryInfoView.exe
+pause
 cls
 color 0A
 echo.
-echo   Options:
-echo   1. Display Battery Health
-echo   2. Display Generated Report
-echo   3. Main Menu
+echo   Is the Battery Health above 60%?
+echo   1. Yes - Continue Diagnostics
+echo   2. No - Shutdown
 echo.
-set /p B=Select an Option ( 1 / 2 / 3 ): 
-if "%B%"=="1" goto dbHealth
-if "%B%"=="2" goto obReport2
-if "%B%"=="3" goto MENU
 
-:dbHealth
+:bHealthInput
+SET /P B=Select an Option ( 1 / 2 ): 
+IF "%B%"=="" (
+    echo  Invalid option, please try again.
+    echo.
+    GOTO bHealthInput
+)
+IF "%B%"=="1" GOTO MENU
+IF "%B%"=="2" GOTO SHUTDOWN
+
+echo  Invalid option, please try again.
+echo.
+GOTO bHealthInput
+
+REM Redirecting to the Keyboard Tester
+:tKeyboard
 cls
 color 0A
-powershell -NoProfile -ExecutionPolicy Bypass -File "%HOMEDRIVE%\Diagnostics\bHealth.ps1"
+%HOMEDRIVE%\Diagnostics\KeyboardTest\KeyboardTest.exe
 echo.
 echo   Options:
-echo   1. Battery Level Above 60%: Continue Diagnostics - Main Menu
-echo   2. Battery Level Below 60%: End Diagnostics - Shutdown
+echo   1. Main Menu
 echo.
-set /p C=Select an Option ( 1 / 2 ): 
-if "%C%"=="1" goto MENU
-if "%C%"=="2" goto SHUTDOWN
 
+:tKeyboardInput
+SET /P H=Select an Option ( 1 ): 
+IF "%H%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO tKeyboardInput
+)
+IF "%H%"=="1" GOTO MENU
 
-:obReport2
+echo Invalid option, please try again.
+echo.
+GOTO tKeyboardInput
+
+REM Redirecting to the WiFi and Bluetooth Menu
+:tWiFiBTMenu
 cls
 color 0A
-type %HOMEDRIVE%\Diagnostics\BatteryInfoView\batteryhealth.txt
+echo   Options:
+echo   1. Check WiFi Status
+echo   2. View Local WiFi Networks
+echo   3. Check Bluetooth Status
+echo   4. View Local Bluetooth Networks
+echo   5. Main Menu
 echo.
+
+:tWiFiBTInput
+SET /P LL=Select an Option ( 1 / 2 / 3 / 4 / 5 ): 
+IF "%LL%"=="" (
+    echo  Invalid option, please try again.
+    echo.
+    GOTO tWiFiBTInput
+)
+IF "%LL%"=="1" GOTO cWiFi
+IF "%LL%"=="2" GOTO tWiFi
+IF "%LL%"=="3" GOTO cBT
+IF "%LL%"=="4" GOTO tBT
+IF "%LL%"=="5" GOTO MENU
+
+echo  Invalid option, please try again.
+echo.
+GOTO tWiFiBTInput
+
+REM Redirecting to the WiFi Viewer
+:tWiFi
+cls
+color 0A
+%HOMEDRIVE%\Diagnostics\WiFiView\WiFiView.exe
 echo   Options:
 echo   1. Previous Menu
 echo   2. Main Menu
 echo.
-set /p D=Select an Option ( 1 / 2 ):
-if "%D%"=="1" goto bHealth2
-if "%D%"=="1" goto MENU
 
-:tKeyboard
+:tWiFiInput
+SET /P M=Select an Option ( 1 / 2 ): 
+IF "%M%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO tWiFiInput
+)
+IF "%M%"=="1" GOTO tWiFiBTMenu
+IF "%M%"=="2" GOTO MENU
+
+echo Invalid option, please try again.
+echo.
+GOTO tWiFiInput
+
+:cWiFi
 cls
 color 0A
-%HOMEDRIVE%\Diagnostics\KeyboardTest.exe
+echo Checking WiFi status...
 echo.
-echo   Options:
-echo   1. Main Menu
-echo.
-SET /P E=Select an Option ( 1 ):
-IF %E%==1 GOTO MENU
 
-:tWiFi
+REM Check if WiFi is connected
+powershell -Command "Test-Connection -ComputerName google.com -Count 1 -Quiet" >nul 2>&1
+IF ERRORLEVEL 1 (
+    echo WiFi is not connected. Please connect to a WiFi network and try again.
+    echo.
+    pause
+    GOTO tWiFiBTMenu
+)
+
+echo WiFi is connected.
+echo Testing internet connectivity by pinging google.com...
+ping -n 4 google.com >nul 2>&1
+IF ERRORLEVEL 1 (
+    echo Unable to reach google.com. There may be an issue with the internet connection.
+    echo.
+    pause
+    GOTO tWiFiBTMenu
+)
+
+echo WiFi is connected and internet is accessible.
+echo.
+pause
+GOTO tWiFiBTMenu
+
+REM Redirecting to the Bluetooth Viewer
+:tBT
 cls
 color 0A
-echo.
-ping 8.8.8.8 
-echo.
+%HOMEDRIVE%\Diagnostics\BTView\BTView.exe
 echo   Options:
-echo   1. Main Menu
+echo   1. Previous Menu
+echo   2. Main Menu
 echo.
-SET /P J=Select an Option ( 1 ):
-IF %J%==1 GOTO MENU
 
+:tBTInput
+SET /P N=Select an Option ( 1 / 2 ): 
+IF "%N%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO tBTInput
+)
+IF "%N%"=="1" GOTO tWiFiBTMenu
+IF "%N%"=="2" GOTO MENU
+
+echo Invalid option, please try again.
+echo.
+GOTO tBTInput
+
+:cBT
+cls
+color 0A
+echo Checking Bluetooth status...
+echo.
+
+REM Check if Bluetooth drivers are installed
+powershell -Command "Get-PnpDevice -Class Bluetooth | Where-Object { $_.Status -eq 'OK' }" >nul 2>&1
+IF ERRORLEVEL 1 (
+    echo Bluetooth drivers are not installed or not functioning properly.
+    echo.
+    pause
+    GOTO tWiFiBTMenu
+)
+
+REM Check if Bluetooth is turned on
+powershell -Command "(Get-Service -Name bthserv).Status" | findstr /i "Running" >nul 2>&1
+IF ERRORLEVEL 1 (
+    echo Bluetooth is not turned on. Please enable Bluetooth and try again.
+    echo.
+    pause
+    GOTO tWiFiBTMenu
+)
+
+echo Bluetooth is installed and turned on.
+echo.
+pause
+GOTO tWiFiBTMenu
+
+REM Redirecting to the Windows Activation Checker
 :tWinAct
 cls
 color 0A
@@ -202,21 +321,48 @@ echo.
 echo   Options:
 echo   1. Main Menu
 echo.
-SET /P K=Select an Option ( 1 ):
-IF %K%==1 GOTO MENU
 
-:GENSYSINFO
+:tWinActInput
+SET /P P=Select an Option ( 1 ): 
+IF "%P%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO tWinActInput
+)
+IF "%P%"=="1" GOTO MENU
+
+echo Invalid option, please try again.
+echo.
+GOTO tWinActInput
+
+REM Redirecting to General System Information Menu
+:GenSysInfo
 cls
 color 0A
-echo Gathering CPU, GPU and RAM Information...
+echo  Gathering CPU, GPU and RAM Information...
+cls
 powershell -NoProfile -ExecutionPolicy Bypass -File "%HOMEDRIVE%\Diagnostics\BasicSysInfo.ps1"
 echo.
 echo   Options:
-echo   1. Main Menu
+echo   1. View Detailed System Info Report
+echo   2. Main Menu
 echo.
-SET /P M=Select an Option ( 1 ):
-IF %M%==1 GOTO MENU
 
+:GenSysInfoInput
+SET /P Q=Select an Option ( 1 / 2 ): 
+IF "%Q%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO GenSysInfoInput
+)
+IF "%Q%"=="1" GOTO SYSINFO
+IF "%Q%"=="2" GOTO MENU
+
+echo Invalid option, please try again.
+echo.
+GOTO GenSysInfoInput
+
+REM Redirecting to the Detailed System Information Report Menu
 :SYSINFO
 cls
 color 0A
@@ -225,8 +371,19 @@ echo.
 echo   Options:
 echo   1. Main Menu
 echo.
-SET /P N=Select an Option ( 1 ):
-IF %N%==1 GOTO MENU
+
+:SysInfoInput
+SET /P R=Select an Option ( 1 ): 
+IF "%R%"=="" (
+    echo Invalid option, please try again.
+    echo.
+    GOTO SysInfoInput
+)
+IF "%R%"=="1" GOTO MENU
+
+echo Invalid option, please try again.
+echo.
+GOTO SysInfoInput
 
 :RESTART
 cls
@@ -244,3 +401,4 @@ EXIT /B
 cls
 color 0A
 EXIT /B
+endlocal
