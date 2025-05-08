@@ -107,7 +107,7 @@ Executed after diagnostics, `Clean-Up.bat` performs:
 ## 📦 Requirements
 
 - Windows 10 or 11 using the **C4P Dual Image**
-- Local admin privileges
+Link: https://github.com/arnoldssemuyaga/Dual-Windows-C4P-Installer
 
 No dependencies — all tools are included and auto-extracted during runtime.
 
