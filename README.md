@@ -122,7 +122,9 @@ After the diagnostics and refurbishment process, the **Clean-Up.bat** script is 
 6. **Restarting the System**: Initiates a system restart with a message indicating the refurbishment is complete.
 7. **Self-Deletion**: Deletes the `Clean-Up.bat` script itself after execution to leave no traces behind.
 
-This script ensures the laptop is fully prepared for deployment, with all unnecessary files removed and system settings optimized. There will be a version without this script for portable usage.
+This script ensures the laptop is fully prepared for deployment, with all unnecessary files removed and system settings optimized.
+
+The public version posted on this GitHub **will not include this script.** This is only applicable with a fresh install of the Dual C4P Windows image.
 
 ---
 
