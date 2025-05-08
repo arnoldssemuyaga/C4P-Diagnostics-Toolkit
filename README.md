@@ -91,7 +91,7 @@ Executed after diagnostics, `Clean-Up.bat` performs:
 6. 🔄 **Reboots** system after notifying user  
 7. 🧨 **Self-deletes** the script to leave no traces  
 
-> 🔒 *This script is only available in the internal version with the Dual C4P image.*
+> 🔒 *This script is only available in the internal version with the Dual C4P image. Link:* https://github.com/arnoldssemuyaga/Dual-Windows-C4P-Installer
 
 ---
 
@@ -106,10 +106,7 @@ Executed after diagnostics, `Clean-Up.bat` performs:
 
 ## 📦 Requirements
 
-- Windows 10 or 11 using the **C4P Dual Image**
-Link: https://github.com/arnoldssemuyaga/Dual-Windows-C4P-Installer
-
-No dependencies — all tools are included and auto-extracted during runtime.
+- No dependencies — all tools are included and auto-extracted during runtime.
 
 ---
 
