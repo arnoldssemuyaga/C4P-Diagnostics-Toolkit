@@ -7,7 +7,7 @@
 **Project Start Date:** January 2025  
 **Current Version:** v1.5  
 **Status:** In Development  
-:---------------------------------------------------------------------------------------------------
+
 ## v0.1 (Early Internal Build)
 - Designed a minimal batch interface structured around a numbered menu system. Each option led to a separate diagnostic or utility task.
 - The script was integrated into the post-Windows deployment environment using SetupComplete.cmd to ensure automatic launch on first login.
@@ -33,7 +33,7 @@
 - **Detailed System Info:** Displays CPU, GPU, motherboard name, and RAM using PowerShell.
 - Implemented Windows Activation status check.
 - Added manual shutdown and restart functions.
-:---------------------------------------------------------------------------------------------------
+  
 ## v1.0 (Public Internal Release)
 - Released a cleaner version with improved user flow and intuitive navigation between different diagnostics and system tools.
 - Introduced reliable exit paths, better fail-safe structures, and a clearer layout to help technicians understand diagnostics expectations.
@@ -48,7 +48,7 @@
 
 **Detailed Changelog**
 - Released the first fully functional version with a polished menu layout and improved menu navigation.
-:---------------------------------------------------------------------------------------------------
+
 ## v1.1
 - Cleaned up interface and reduced dependency on outdated tools like the Portable Camera tester, which lacked full mic testing support.
 - Expanded PowerShell output to include motherboard and GPU information, which helped to quickly show all system specifications in a centralized location.
@@ -64,7 +64,7 @@
 **Detailed Changelog**
 - Removed Portable Camera tool due to lack of microphone testing capability.
 - Expanded system info to include motherboard, GPU, and memory type via PowerShell.
-:---------------------------------------------------------------------------------------------------
+
 ## v1.2
 - Designed the refurb flow concept to digitize the C4P QA checklist. This new logic sequence was placed under Option #0.
 - This allowed staff to formally validate device condition across critical categories (body, screen, ports, battery) within the script itself.
@@ -81,7 +81,7 @@ Link: https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWS
 **Detailed Changelog**
 - Introduced option #0: Refurb checklist menu mirroring the physical C4P QA checklist.
 - Created the first `Passed.txt` generator to confirm diagnostics were run.
-:---------------------------------------------------------------------------------------------------
+
 ## v1.3
 - Developed a fully guided diagnostic checklist into the tool, requiring user input and validation for each component test.
 - Added structured prompts for asset tag input, technician name, and grading of body condition from A–F.
@@ -110,7 +110,7 @@ Link: https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWS
 - WiFi and Bluetooth tests enhanced using WiFiView and BTView.
 - Failover logic for missing tools integrated.
 - Added `Clean-Up.bat` to delete logs, tools, and shortcuts on finalization.
-:---------------------------------------------------------------------------------------------------
+
 ## v1.4
 - Converted the batch script into a portable .EXE, embedding the entire diagnostics logic and dependencies for portability.
 - Refactored how the tool handles temporary files and diagnostics logs—moved `Clean-Up.bat` to a permanent path for better execution.
@@ -140,7 +140,7 @@ Link: https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWS
 - Camera/mic usage traces now cleaned during cleanup.
 - AUX port crash bug fixed.
 - Menu loops finalized for complete diagnostic flow.
-:---------------------------------------------------------------------------------------------------
+
 ## v1.5
 - Implemented backend logic in PowerShell to verify Bluetooth and WiFi functionality by checking drivers, services, and connectivity.
 - Updated the refurb checklist to allow launching tests from within each section, streamlining technician workflows.
@@ -160,14 +160,14 @@ Link: https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWS
   - Checks if services (`bthserv`, `wlan`) are running
   - Displays status or failure message
 - Refurb menu now supports in-line test re-entry (e.g. "Run Test" reopens tool).
-:---------------------------------------------------------------------------------------------------
+
 ## v1.6 (Planned)
 - Relocate `%formattedTime%` logic to the menu loop so the timestamp updates every time the user returns to the main menu.
 - Streamline diagnostics so tools like KeyboardTest.exe can be launched directly from the refurb menu without going through an extra submenu.
 - Refine refurbishment confirmation generator logic so tests for missing hardware (e.g., no Ethernet) are recorded as "N/A" rather than "Passed", improving report accuracy.
 - Develop a `.bat` file that generates on-the-fly and deletes the `.exe` and all related diagnostics files after reboot via `shell:startup`.
 - Change `WinAct.vbs` to show activation status in first dialog.
-:---------------------------------------------------------------------------------------------------
+
 ## Future Goals
 - Rebuild GUI version in PowerShell using WinForms or WPF.
 - Create installer with version-checking and USB deployment support.
@@ -176,4 +176,3 @@ Link: https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWS
 - Generate branded “Donation Ready” certificate (PDF or HTML) with QR code.
 - Track technician metrics (e.g., average test duration, skipped sections).
 - Add percentage-based cleanup progress visual for clarity.
-:---------------------------------------------------------------------------------------------------
