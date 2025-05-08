@@ -19,7 +19,6 @@
 - Basic support for BatteryInfoView and `systeminfo` retrieval.
 
 **Known Issues & Limitations:**
-- BatteryInfoView must be manually closed before script can continue.
 - No fallback logic if diagnostic tools are missing from expected directories.
 
 **Detailed Changelog**
