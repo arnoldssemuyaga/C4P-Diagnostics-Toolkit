@@ -1,151 +1,118 @@
 # 💻 C4P Diagnostics Toolkit
 
+![License](https://img.shields.io/github/license/arnoldssemuyaga/C4P-Diagnostics-Toolkit?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Windows-blue?style=flat-square)
+![Made With](https://img.shields.io/badge/Built%20With-Batch%20%26%20PowerShell-lightgrey?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
+
 The **C4P Diagnostics Toolkit** is a standalone executable designed to assist in the refurbishment and quality assurance of laptops. It provides a user-friendly interface for performing various diagnostic tests, generating reports, and ensuring that laptops meet the required standards for donation or reuse.
 
-## Purpose
+---
 
-The toolkit automates the process of testing and verifying the functionality of key laptop components, including hardware, software, and system configurations. It also includes a final refurbishment process that cleans up temporary files, generates a detailed report, and prepares the laptop for deployment.
+## 🎯 Purpose
 
-This tool is specifically designed to be run on a fresh install of the **Dual Windows 10/11 C4P image**.
+This toolkit automates the process of testing and verifying key laptop components—hardware, software, and system configurations. It finishes with a clean-up process that removes setup files, generates a summary report, and prepares the laptop for deployment.
+
+> 🔒 **Note:** This tool is specifically built to run on a fresh install of the **Dual Windows 10/11 C4P image**.
 
 ---
 
-## Features
+## ✨ Features
 
-The executable includes the following embedded tools, which are extracted to a temporary directory during runtime:
+The executable includes the following embedded tools, extracted to a temporary directory during runtime:
 
-- **BatteryInfoView**: For generating detailed battery health reports.
-- **USBDeview**: For testing USB port functionality.
-- **InjuredPixels**: For screen testing, including dead pixel detection.
-- **KeyboardTester**: For verifying the functionality of all keyboard keys, including special keys.
-- **WiFiView**: For viewing and diagnosing local WiFi networks.
-- **BTView**: For viewing and diagnosing local Bluetooth devices.
-- **Custom PowerShell Scripts**: For gathering system information, checking battery health, and more.
+- 🔋 **BatteryInfoView** — Detailed battery health reports  
+- ⌨️ **KeyboardTester** — Test all keys, including function and special keys  
+- 📶 **WiFiView** — Scan and view nearby WiFi networks  
+- 📡 **BTView** — Scan and diagnose Bluetooth devices  
+- 🖥️ **InjuredPixels** — Dead pixel and display quality test  
+- 🔌 **USBDeview** — Test USB port functionality  
+- 📜 **Custom PowerShell Scripts** — Gather system specs, battery data, and more
 
-These tools are seamlessly integrated into the diagnostics process and require no additional setup from the user.
-
----
-
-## Main Menu Options
-
-The main menu provides the following options:
-
-1. **#0 - Finalize Refurbishment and Start C4P Clean-Up**  
-   Triggers the diagnostic process and finalizes the refurbishment. See the [Diagnostics Section](#diagnostics-section) for details.
-
-2. **#1 - Check Battery Health w/ BatteryInfoView**  
-   Generates a battery health report using BatteryInfoView and provides options to display the report or battery health.
-
-3. **#2 - Test Keyboard**  
-   Launches the KeyboardTester tool to verify the functionality of all keys, including special keys.
-
-4. **#3 - Test Camera and Microphone**  
-   Opens the Windows Camera app and microphone settings to test the webcam and microphone functionality.
-
-5. **#4 - Test WiFi and Bluetooth**  
-   Checks the status of WiFi and Bluetooth, views local networks, and verifies connectivity.
-
-6. **#5 - Verify Windows Activation**  
-   Retrieves and displays the Windows activation key and activation status.
-
-7. **#6 - System Information**  
-   Gathers and displays detailed system information, including CPU, GPU, and RAM details.
-
-8. **#7 - Generate Built-in Windows Battery Report**  
-   Uses the `powercfg` command to generate a built-in Windows battery report.
-
-9. **#8 - Open Generated Windows Battery Report**  
-   Opens the previously generated Windows battery report in the default browser.
-
-10. **Restart or Shutdown Options**  
-    - Enter `r` to restart the system.  
-    - Enter `s` to shut down the system.  
-    - Enter `c` to close the tool.
+> All tools run seamlessly from the toolkit with no extra setup required.
 
 ---
 
-## Diagnostics Section
+## 🧭 Main Menu Options
 
-The **Finalize Refurbishment and Start C4P Clean-Up** option (#0) initiates a comprehensive diagnostic process that covers the following laptop components:
+#0 Finalize Refurbishment and Start C4P Clean-Up
 
-1. **Body**  
-   - Checks for dents, cracks, or missing pieces.  
-   - Assigns a quality grade (A, B, C, D, F) based on the laptop's exterior condition.
+#1 Check Battery Health (BatteryInfoView)
 
-2. **Screen**  
-   - Verifies the absence of defects or cracks.  
-   - Includes a screen testing tool for dead pixels, color accuracy, and brightness.
+#2 Test Keyboard
 
-3. **Ports**  
-   - Tests the functionality of all ports, including:  
-     - Charging Port  
-     - USB-A/USB-C  
-     - Video Out (HDMI/DP/VGA/DVI)  
-     - 3.5mm Headphone Jack  
-     - Ethernet
+#3 Test Camera and Microphone
 
-4. **Touchpad**  
-   - Ensures the touchpad is fully functional, including left-click, right-click, and general movement.
+#4 Test WiFi and Bluetooth
 
-5. **Keyboard**  
-   - Confirms all keys are present and functional, including special keys like Function, Num Lock, and Caps Lock.
+#5 Verify Windows Activation
 
-6. **Battery**  
-   - Assesses battery health and ensures it meets the required standards for donation.
+#6 System Information
 
-7. **WiFi and Bluetooth**  
-   - Verifies WiFi connectivity and Bluetooth functionality using **WiFiView** and **BTView**.
+#7 Generate Windows Battery Report
 
-8. **Speakers**  
-   - Tests the internal speakers by playing a test sound.
+#8 Open Generated Battery Report
 
-9. **Webcam and Microphone**  
-   - Confirms the webcam and microphone are operational and free of defects.
-
-10. **Windows Updates**  
-    - Ensures critical Windows updates are installed.
-
-11. **Windows Activation**  
-    - Verifies that Windows is activated and ready for use.
-
-At the end of the diagnostics, the tool generates a detailed report (`Passed.txt`) on the desktop, summarizing the results of all tests and confirming the laptop's suitability for donation.
-
-## Clean-Up Script
-
-After the diagnostics and refurbishment process, the **Clean-Up.bat** script is executed to finalize the setup. Its functionality includes:
-
-1. **Removing Temporary and Setup Files**: Deletes unnecessary files and folders, such as setup/startup scripts, diagnostic tools, desktop icons and temporary files, to ensure a clean system.
-2. **Resetting Windows Update Settings**: Configures Windows Update to "Notify before download and install" and applies related registry changes.
-3. **Enabling Hibernate and Fast Startup**: Turns on hibernation and enables Fast Startup for improved boot performance.
-4. **Applying Registry Modifications**: Updates various registry settings to optimize the system for end-user use.
-5. **Restarting Windows Explorer**: Restarts the Windows Explorer process to apply changes to the desktop environment.
-6. **Restarting the System**: Initiates a system restart with a message indicating the refurbishment is complete.
-7. **Self-Deletion**: Deletes the `Clean-Up.bat` script itself after execution to leave no traces behind.
-
-This script ensures the laptop is fully prepared for deployment, with all unnecessary files removed and system settings optimized.
-
-The public version posted on this GitHub **will not include this script.** This is only applicable with a fresh install of the Dual C4P Windows image.
+🔁 Enter `r` to Restart  ⏻ Enter `s` to Shutdown  ❌ Enter `c` to Close the Tool
 
 ---
 
-## How to Use
+## 🔍 Diagnostics Section (`#0`)
 
-1. Run the executable with administrative privileges.  
-2. Follow the on-screen instructions to navigate through the menu options.  
-3. Select the desired diagnostic or testing option from the main menu.  
-4. For the final refurbishment process, select option `#0` and complete the guided steps.
+Running the **Finalize Refurbishment** option initiates a guided checklist to test:
+
+| Component             | Description                                                                |
+|-----------------------|----------------------------------------------------------------------------|
+|      🖥️  Body        |            Check dents, cracks, missing parts, and assign a grade          |
+|      💡  Screen       |            Verify no cracks, and run dead pixel test                       |
+|      🔌  Ports       |            Test all I/O ports including USB, video, audio, Ethernet        |
+|      🖱️  Touchpad     |            Test click functions and cursor movement                        |
+|      ⌨️ Keyboard     |            Check all keys including special keys                           |
+|      🔋  Battery      |            Review battery health with BatteryInfoView                      |
+| 📶 WiFi/📡 Bluetooth |            Check connectivity and scan nearby devices                      |
+|      🔊  Speakers    |            Play a sound to confirm output                                  |
+|   📷 Webcam/🎤 Mic   |            Launch camera and sound settings for testing                   |
+|  🛠️ Windows Updates  |            Confirm installation of essential updates                       |
+|    ✅  Activation    |            Check Windows activation status                                 |
+
+📄 After all tests, a report (`Passed.txt`) is created on the desktop summarizing all results.
 
 ---
 
-## Requirements
+## 🧹 Clean-Up Script (Final Step)
 
-- **Windows Operating System** (Dual Windows 10/11 C4P image)  
-- **Administrative Privileges**  
+Executed after diagnostics, `Clean-Up.bat` performs:
 
-The executable is self-contained and does not require any external dependencies.
+1. 🗑️ **Deletes** temp files, scripts, and diagnostics tools  
+2. 🔧 **Resets** Windows Update to "Notify before download"  
+3. ⚡ **Enables** Hibernate & Fast Startup  
+4. 🧠 **Applies** registry tweaks for optimization  
+5. 🔁 **Restarts** Windows Explorer  
+6. 🔄 **Reboots** system after notifying user  
+7. 🧨 **Self-deletes** the script to leave no traces  
+
+> 🔒 *This script is only available in the internal version with the Dual C4P image.*
 
 ---
 
-## License
+## 🚀 How to Use
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+1. 🛑 Run the executable **as Administrator**  
+2. 📋 Follow on-screen instructions  
+3. ✅ Select diagnostics or start full refurbishment (`#0`)  
+4. 🧼 Complete steps and let the tool prepare the system
+
+---
+
+## 📦 Requirements
+
+- Windows 10 or 11 using the **C4P Dual Image**
+- Local admin privileges
+
+No dependencies — all tools are included and auto-extracted during runtime.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
