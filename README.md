@@ -113,3 +113,10 @@ Executed after diagnostics, `Clean-Up.bat` performs:
 ## 📄 License
 
 This project is licensed under the [GPL 3.0 License](LICENSE).
+
+---
+
+## 🙌 Credits
+
+Built and maintained by **Arnold Ssemuyaga**  
+Made for the **Computers 4 People** refurbishment pipeline
