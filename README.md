@@ -91,7 +91,7 @@ Executed after diagnostics, `Clean-Up.bat` performs:
 6. 🔄 **Reboots** system after notifying user  
 7. 🧨 **Self-deletes** the script to leave no traces  
 
-> 🔒 *This script is only available in the internal version with the Dual C4P image. Link:* https://github.com/arnoldssemuyaga/Dual-Windows-C4P-Installer
+> 🔒 *This script is only available in the internal version with the Dual C4P image. Link:* https://github.com/Computers-4-People/Dual-Windows-C4P-Installer
 
 ---
 
