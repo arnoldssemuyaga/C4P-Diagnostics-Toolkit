@@ -76,7 +76,9 @@ Running the **Finalize Refurbishment** option initiates a guided checklist to te
 |    ✅  Activation    |            Check Windows activation status                                 |
 
 📄 After all tests, a report (`Passed.txt`) is created on the desktop summarizing all results.
-
+---
+📄 The diagnostic process is built to reflect the [C4P Quality Assurance Checklist.](https://docs.google.com/document/d/1Kpm2P4787T_GRvwosgPtFBS1aq-QCjJc-mQaWSITl_A/edit?usp=sharing)
+---
 ---
 
 ## 🧹 Clean-Up Script (Final Step)
